@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { waters } from "@/data/waters";
-import WaterRadar from "@/components/WaterRadar";
+import { waters } from "./../data/waters";
+import WaterRadar from "../components/WaterRadar";
 
 export default function Home() {
   const [compareRes, setCompareRes] = useState(null);
