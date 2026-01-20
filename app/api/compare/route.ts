@@ -2,14 +2,12 @@ import { waters } from "../../../data/waters";
 
 export async function POST(request: Request) {
   const { ids } = await request.json();
-
   const selected = waters.filter(w => ids.includes(w.id));
   if (selected.length === 0) {
     return Response.json({ error: "No water selected" }, { status: 400 });
   }
 
   const metrics = ["pH","hardness","calcium","magnesium","sodium","nitrate"];
-
   const values = selected.map(w => metrics.map(m => w[m]));
   const means = metrics.map((_, i) => values.map(v => v[i]).reduce((a,b) => a+b)/values.length);
   const stds = metrics.map((_, i) => Math.sqrt(values.map(v => (v[i]-means[i])**2).reduce((a,b)=>a+b)/values.length));
@@ -21,6 +19,5 @@ export async function POST(request: Request) {
   });
 
   results.sort((a,b) => b.score - a.score);
-
   return Response.json({ samples: results, best: results[0] });
 }

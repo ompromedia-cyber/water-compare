@@ -25,6 +25,5 @@ export default function WaterRadar({ sample }) {
       }
     ]
   };
-
   return <Radar data={data} />;
 }

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { waters } from "./../data/waters";
+import { waters } from "../data/waters";
 import WaterRadar from "../components/WaterRadar";
 
 export default function Home() {
@@ -25,7 +25,6 @@ export default function Home() {
   return (
     <div style={{ padding: "1rem", fontFamily: "Arial" }}>
       <h1>Сравнение воды</h1>
-
       <h2>Лучшая вода: {compareRes.best.name}</h2>
       <p>Score: {compareRes.best.score.toFixed(2)}</p>
 
