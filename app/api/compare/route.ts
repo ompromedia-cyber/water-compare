@@ -1,4 +1,4 @@
-import { waters } from "@/data/waters";
+import { waters } from "../../../data/waters";
 
 export async function POST(request: Request) {
   const { ids } = await request.json();
