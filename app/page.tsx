@@ -1,35 +1,27 @@
-"use client";
-import { useEffect, useState } from "react";
-import { waters } from "../data/waters";
-import WaterRadar from "../components/WaterRadar";
+'use client';
+import { useEffect, useState } from 'react';
+import { waters } from '../data/waters';
+import WaterRadar from '../components/WaterRadar';
 
 export default function Home() {
-  const [compareRes, setCompareRes] = useState(null);
-
-  const handleCompare = async () => {
-    const ids = waters.map(w => w.id);
-    const res = await fetch("/api/compare", {
-      method: "POST",
-      body: JSON.stringify({ ids }),
-    });
-    const json = await res.json();
-    setCompareRes(json);
-  };
+  const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    handleCompare();
+    fetch('/api/compare', {
+      method: 'POST',
+      body: JSON.stringify({ ids: waters.map(w => w.id) })
+    })
+      .then(r => r.json())
+      .then(setData);
   }, []);
 
-  if (!compareRes) return <div>Загрузка...</div>;
+  if (!data) return <div>Загрузка...</div>;
 
   return (
-    <div style={{ padding: "1rem", fontFamily: "Arial" }}>
-      <h1>Сравнение воды</h1>
-      <h2>Лучшая вода: {compareRes.best.name}</h2>
-      <p>Score: {compareRes.best.score.toFixed(2)}</p>
-
-      {compareRes.samples.map(w => (
-        <div key={w.id} style={{ marginBottom: "2rem" }}>
+    <div style={{ padding: 20 }}>
+      <h1>Лучшая вода: {data.best.name}</h1>
+      {data.samples.map((w:any) => (
+        <div key={w.id}>
           <h3>{w.name}</h3>
           <WaterRadar sample={w} />
         </div>
