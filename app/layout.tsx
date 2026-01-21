@@ -1,12 +1,6 @@
 import './globals.css';
-import { ReactNode } from 'react';
 
-export const metadata = {
-  title: 'Сравнение воды',
-  description: 'Сервис сравнения воды с диаграммами',
-};
-
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
       <body>{children}</body>
